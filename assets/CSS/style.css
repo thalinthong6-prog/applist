@@ -1,0 +1,35 @@
+/* Classic Buttons */
+.classic-btn {
+    padding: 8px 20px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    border: 1px solid #333;
+    background-color: #f8f9fa;
+    color: #333;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.classic-btn.success {
+    border-color: #198754;
+    color: #198754;
+}
+
+.classic-btn.success:hover {
+    background-color: #198754;
+    color: white;
+}
+
+.classic-btn.danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.classic-btn.danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.classic-btn:active {
+    transform: scale(0.98);
+}
