@@ -22,15 +22,15 @@ if (isset($_POST['username'], $_POST['passwd'])) {
 }
 ?>
 <form method="post" action="./?page=login" class="col-md-10 col-lg-6 mx-auto">
-    <h3 style="font-weight: bold; text-align: center; color: White;">Login Page</h3>
+    <h3 style="font-weight: bold; text-align: center; color: White;">Login</h3>
     <div class="mb-3">
-        <label class="form-label" style="font-weight: bold; color: white;">Username</label>
+        <label class="form-label" style="font-weight: bold; color: white;">Username <i class="bi bi-people-fill"></i> </label>
         <input name="username" value="<?php echo $username ?>" type="text" class="form-control
         <?php echo empty($usernameErr) ? '' : 'is-invalid' ?>">
         <div class="invalid-feedback"><?php echo $usernameErr ?></div>
     </div>
     <div class="mb-3">
-        <label class="form-label" style="font-weight: bold; color: white;">Password</label>
+        <label class="form-label" style="font-weight: bold; color: white;">Password <i class="bi bi-lock-fill"></i> </label>
         <input name="passwd" type="password" class="form-control
         <?php echo empty($passwdErr) ? '' : 'is-invalid' ?>">
         <div class="invalid-feedback"><?php echo $passwdErr ?></div>

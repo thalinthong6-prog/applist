@@ -36,7 +36,7 @@ if (isset($_POST['uploadPhoto'])) {
 
     if (!isset($_FILES['photo']) || $_FILES['photo']['error'] == 4) {
 
-        echo '<div class="alert alert-danger">Please input your photo.</div>';
+        echo '<div class="alert alert-danger">Please input your picture.</div>';
 
     } elseif ($_FILES['photo']['error'] == 0) {
 
@@ -62,8 +62,8 @@ if (isset($_POST['uploadPhoto'])) {
 
         if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) {
             updateUserPhoto($userId, $fileName);
-            echo '<div class="alert alert-success">'.$message.'</div>';
-            
+            echo '<div class="alert alert-success">' . $message . '</div>';
+
         }
     }
 }
@@ -77,7 +77,7 @@ if (isset($_POST['deletePhoto'])) {
     if (!isset($_POST['confirmDelete'])) {
         echo '
         <div class="alert alert-warning">
-            Do you want to delete your profile?
+            Do you want to delete your profile picture?
             <form method="post">
                 <button type="submit" name="deletePhoto" value="1" class="btn btn-danger btn-sm">Yes</button>
                 <button type="button" onclick="location.href=\'./?page=profile\'" class="btn btn-secondary btn-sm">No</button>
@@ -87,8 +87,8 @@ if (isset($_POST['deletePhoto'])) {
         return;
     }
 
-    if (!empty($currentPhoto) && file_exists('./assets/images/Profile_PNG.png' . $currentPhoto)) {
-        unlink('./assets/images/Profile_PNG.png' . $currentPhoto); // delete file
+    if (!empty($currentPhoto) && file_exists('./assets/images/Profile.png' . $currentPhoto)) {
+        unlink('./assets/images/Profile-PNG-Photo.png' . $currentPhoto); // delete file
     }
 
     deleteUserPhoto($userId); // delete from database
@@ -104,7 +104,7 @@ if (isset($_POST['deletePhoto'])) {
         <form method="post" action="./?page=profile" enctype="multipart/form-data">
             <div class="d-flex justify-content-center">
                 <?php
-                $photoPath = './assets/images/Profile_PNG.png';
+                $photoPath = './assets/images/Profile-PNG-Photo.png';
 
                 if (isset($_SESSION['user_id'])) {
                     $userPhoto = getUserPhoto($_SESSION['user_id']);

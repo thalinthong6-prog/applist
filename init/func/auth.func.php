@@ -135,3 +135,33 @@ function getUserPhoto($userId) {
     }
     return null;
 }
+
+function uploadimages($image)
+{
+    $img_name = $image['name'];
+    $img_size = $image['size'];
+    $tmp_name = $image['tmp_name'];
+    $error = $image['error'];
+
+    $dir = './assets/images/';
+    $allow_exs = ['jpg', 'png', 'jpeg'];
+    $images_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+    $image_lowercase_ex = strtolower($images_ex);
+
+    if(!in_array($image_lowercase_ex, $allow_exs)) {
+        throw new Exception('File extension is not allowed');
+    }
+
+    if ($error !== 0) {
+        throw new Exception('Unkonw error occurred!');
+    }
+
+    if ($img_size > 500000) {
+        throw new Exception('File size is too large!');
+    }
+
+    $new_image_name = uniqid("PI-") . '.' . $image_lowercase_ex;
+    $image_path = $dir . $new_image_name;
+    move_uploaded_file($tmp_name, $image_path);
+    return $image_path;
+}

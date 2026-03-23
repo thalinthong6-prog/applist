@@ -31,6 +31,7 @@ function confirmDelete() {
     return confirm("Do you want to delete your profile?");
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--<script>
 let cropper;
 const image = document.getElementById('previewImage');
