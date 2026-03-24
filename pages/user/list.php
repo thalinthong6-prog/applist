@@ -44,8 +44,8 @@
 </div>
 
 <script>
-    $(document).ready(function ()) {
-        $('.btn-danger').click(function (e)) {
+    $(document).ready(function () {
+        $('.btn-danger').click(function (e) {
             e.preventDefault();
             Swal.fire({
                 title: "Are you sure?",
@@ -58,8 +58,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = $(this).attr('href');
-                };
+                }
+                });
             });
-        }
-    }
+        });
 </script>
