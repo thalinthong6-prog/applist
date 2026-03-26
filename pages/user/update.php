@@ -8,17 +8,22 @@ if ($targetUser == null || $targetUser->level == 'admin') {
 $nameErr = $usernameErr = $passwdErr = '';
 $name = $targetUser->name;
 $username = $targetUser->username;
+$address = $targetUser->address;
 
-if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo'])) {
+if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo'], $_POST['address'])) {
     $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $passwd = trim($_POST['passwd']);
+    $address = trim($_POST['address']);
     if (empty($name)) {
         $nameErr = 'Please input name!';
     }
     if (empty($username)) {
         $usernameErr = 'Please input username!';
+    }
+    if (empty($address)) {
+        $addressErr = 'Please input address!';
     }
     // if (empty($passwd)) {
     //     $passwdErr = 'Please input password!';
@@ -28,13 +33,13 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     }
     if (empty($nameErr) && empty($usernameErr)) {
         try {
-            if (updateUser($id, $name, $username, $passwd, $photo)) {
+            if (updateUser($id, $name, $username, $passwd, $photo, $address)) {
                 echo '<div class="alert alert-success" role="alert">
                 Update Name and Username successful! <a href="./?page=user/list">go to list
                 </a>
             </div>';
             } else {
-                if (updateUser($id, $name, $username, $passwd, $photo)) {
+                if (updateUser($id, $name, $username, $passwd, $photo ,$address)) {
                     echo '<div class="alert alert-success" role="alert">
                     Update Name, Username and Password successful! <a href="./?page=user/list">go to list
                     </a>
@@ -57,7 +62,7 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     <div class="d-flex justify-content-center">
         <input name="photo" type="file" id="profileUpload" hidden>
         <label role="button" for="profileUpload">
-            <img src="<?php echo $targetUser->photo ?: './assets/images/Profile.png'; ?>
+            <img src="<?php echo $targetUser->photo ?: './assets/images/Profile-PNG-Photo.png'; ?>
             " class="rounded img-thumbnail" style="max-width:200px">
         </label>
     </div>
@@ -72,6 +77,12 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
         <input name="username" value="<?php echo $username ?>" type="text" class="form-control
         <?php echo empty($usernameErr) ? '' : 'is-invalid' ?>">
         <div class="invalid-feedback"><?php echo $usernameErr ?></div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <input name="address" value="<?php echo $address ?>" type="text" class="form-control
+        <?php echo empty($addressErr) ? '' : 'is-invalid' ?>">
+        <div class="invalid-feedback"><?php echo $addressErr ?></div>
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>

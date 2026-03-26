@@ -6,10 +6,10 @@ include './includes/header.inc.php';
 include './includes/navbar.inc.php';
 
 
-$available_pages = ['login', 'register', 'logout', 'dashboard', 'profile','user/list', 'user/create', 'user/update', 'user/delete'];
+$available_pages = ['login', 'register', 'logout', 'dashboard', 'profile','user/list', 'user/create', 'user/update', 'user/delete', 'user/report'];
 $logged_in_pages = ['dashboard', 'profile'];
 $non_logged_in_pages = ['login', 'register'];
-$admin_pages = ['user/list','user/create', 'user/update', 'user/delete'];
+$admin_pages = ['user/list','user/create', 'user/update', 'user/delete', 'user/report'];
 
 $page = '';
 if (isset($_GET['page'])) {

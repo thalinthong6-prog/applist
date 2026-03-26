@@ -1,12 +1,13 @@
 <?php
-$nameErr = $usernameErr = $passwdErr = '';
-$name = $username = '';
+$nameErr = $usernameErr = $passwdErr = $addressErr = '';
+$name = $username = $address = '';
 
-if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo'])) {
+if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['address'], $_FILES['photo'])) {
     $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $passwd = trim($_POST['passwd']);
+    $address = trim($_POST['address']);
     if (empty($name)) {
         $nameErr = 'Please input name!';
     }
@@ -16,13 +17,16 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     if (empty($passwd)) {
         $passwdErr = 'Please input password!';
     }
+    if (empty($address)) {
+        $addressErr = 'Please input address!';
+    }
     if (usernameExists($username)) {
         $usernameErr = 'Please choose another username !';
     }
-    if (empty($nameErr) && empty($usernameErr) && empty($passwdErr)) {
+    if (empty($nameErr) && empty($usernameErr) && empty($passwdErr) && empty($addressErr)) {
         try {
-            if (createUser($name, $username, $passwd, $photo)) {
-                $name = $username = '';
+            if (createUser($name, $username, $passwd, $address, $photo)) {
+                $name = $username = $address = '';
                 echo '<div class="alert alert-success" role="alert">
             Create successful! <a href="./?page=user/list">go to list</a>
             </div>';
@@ -46,7 +50,7 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     <div class="d-flex justify-content-center">
         <input name="photo" type="file" id="profileUpload" hidden>
         <label role="button" for="profileUpload">
-            <img src="./assets/images/Profile_PNG.png" class="rounded img-thumbnail" style="max-width:200px">
+            <img src="./assets/images/Profile-PNG-Photo.png" class="rounded img-thumbnail" style="max-width:200px">
         </label>
     </div>
     <div class="mb-3">
@@ -60,6 +64,12 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
         <input name="username" value="<?php echo $username ?>" type="text" class="form-control
         <?php echo empty($usernameErr) ? '' : 'is-invalid' ?>">
         <div class="invalid-feedback"><?php echo $usernameErr ?></div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <input name="address" value="<?php echo $address ?>" type="text" class="form-control
+        <?php echo empty($addressErr) ? '' : 'is-invalid' ?>">
+        <div class="invalid-feedback"><?php echo $addressErr ?></div>
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>

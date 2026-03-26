@@ -2,17 +2,26 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="fw-bold m-0">Users List</h3>
 
-        <a href="./?page=user/create" role="button" class="btn btn-success">
-            <i class="bi bi-person-fill-add"></i> Create New
-        </a>
+        <div class="btn-group-1">
+            <a href="./?page=user/report" role="button" class="btn btn-success">
+                <i class="bi bi-person-fill-add"></i> Report
+            </a>
+
+            <a href="./?page=user/create" role="button" class="btn btn-success">
+                <i class="bi bi-person-fill-add"></i> Create New
+            </a>
+        </div>
+
+
     </div>
 
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
-                <th>#</th>
+                <th></th>
                 <th>Photo</th>
                 <th>Name</th>
+                <th>Address</th>
                 <th>Options</th>
             </tr>
 
@@ -27,6 +36,7 @@
                             class="rounded img-thumbnail" style="max-width:100px"/>
                         </td>
                         <td>' . $row->name . '</td>
+                        <td>' . $row->address . '</td>
                         <td>
                             <a href="./?page=user/update&id=' . $row->id . '" 
                             role="button" class="btn btn-primary">Edit
@@ -59,7 +69,7 @@
                 if (result.isConfirmed) {
                     window.location.href = $(this).attr('href');
                 }
-                });
             });
         });
+    });
 </script>

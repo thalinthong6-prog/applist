@@ -19,7 +19,14 @@ if (isset($_POST['username'], $_POST['passwd'])) {
             $usernameErr = 'Username or password is incorrect!';
         }
     }
+    if ($_SESSION['role'] == 'admin') {
+    $_SESSION['can_create'] = 1;
+    $_SESSION['can_view'] = 1;
+    $_SESSION['can_edit'] = 1;
+    $_SESSION['can_delete'] = 1;
 }
+}
+
 ?>
 <form method="post" action="./?page=login" class="col-md-10 col-lg-6 mx-auto">
     <h3 style="font-weight: bold; text-align: center; color: White;">Login</h3>
