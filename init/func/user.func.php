@@ -1,5 +1,5 @@
 <?php
-function createUser($name, $username, $passwd, $address, $photo)
+function createUser($name, $username, $passwd, $position, $address, $photo)
 {
     global $db;
 
@@ -8,8 +8,8 @@ function createUser($name, $username, $passwd, $address, $photo)
         $image_path = uploadimages($photo);
     }
 
-    $query = $db->prepare('INSERT INTO tbl_users (name,username,passwd,photo,address) VALUES (?,?,?,?,?)');
-    $query->bind_param('sssss', $name, $username, $passwd, $image_path, $address);
+    $query = $db->prepare('INSERT INTO tbl_users (name,username,passwd,position,address,photo) VALUES (?,?,?,?,?,?)');
+    $query->bind_param('ssssss', $name, $username, $passwd, $position, $address, $image_path);
     $query->execute();
     if ($db->affected_rows) {
         return true;
@@ -48,7 +48,7 @@ function deleteUser($id)
     }
     return false;
 }
-function updateUser($id, $name, $username, $passwd, $photo, $address)
+function updateUser($id, $name, $username, $passwd, $photo, $address , $position)
 {
     global $db;
 
@@ -58,25 +58,25 @@ function updateUser($id, $name, $username, $passwd, $photo, $address)
     }
 
     if ($image_path) {
-        $query = $db->prepare('UPDATE tbl_users SET name=?, username=?, passwd=?, photo=?, address=? WHERE id=?');
-        $query->bind_param('sssssi', $name, $username, $passwd, $image_path, $address, $id);
+        $query = $db->prepare('UPDATE tbl_users SET name=?, username=?, passwd=?, photo=?, address=?, position=? WHERE id=?');
+        $query->bind_param('ssssssi', $name, $username, $passwd, $image_path, $address, $position, $id);
     } else {
 
         if ($image_path) {
 
             $query = $db->prepare('UPDATE tbl_users 
-                                   SET name=?, username=?, photo=? , address=? 
+                                   SET name=?, username=?, photo=? , address=?, position=? 
                                    WHERE id=?');
 
-            $query->bind_param('sssi', $name, $username, $image_path, $address, $id);
+            $query->bind_param('sssi', $name, $username, $image_path, $address, $position, $id);
 
         } else {
 
             $query = $db->prepare('UPDATE tbl_users 
-                                   SET name=?, username=?, address=? 
+                                   SET name=?, username=?, address=?, position=? 
                                    WHERE id=?');
 
-            $query->bind_param('sssi', $name, $username, $address, $id);
+            $query->bind_param('sssss', $name, $username, $address, $position, $id);
         }
 
     }
@@ -95,5 +95,25 @@ function createUserWithPermissions($name, $username, $password, $photo, $permiss
     $can_delete = in_array('delete', $permissions) ? 1 : 0;
 
     // SQL insert here
+}
+
+function saveAttendance($conn, $name, $date, $attendance) {
+    // Clean inputs
+    $name = intval($name);
+    $date = mysqli_real_escape_string($conn, $date);
+    $attendance = mysqli_real_escape_string($conn, $attendance);
+
+    // Insert or update attendance
+    $sql = "
+        INSERT INTO tbl_attendance (student_id, date, attendance)
+        VALUES ('$name', '$date', '$attendance')
+        ON DUPLICATE KEY UPDATE attendance='$attendance'
+    ";
+
+    if(mysqli_query($conn, $sql)) {
+        return true; // success
+    } else {
+        return false; // error
+    }
 }
 ?>

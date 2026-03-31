@@ -8,19 +8,24 @@ if ($targetUser == null || $targetUser->level == 'admin') {
 $nameErr = $usernameErr = $passwdErr = '';
 $name = $targetUser->name;
 $username = $targetUser->username;
+$position = $targetUser->position;
 $address = $targetUser->address;
 
-if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo'], $_POST['address'])) {
+if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo'], $_POST['address'], $_POST['position'])) {
     $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $passwd = trim($_POST['passwd']);
+    $position = trim($_POST['position']);
     $address = trim($_POST['address']);
     if (empty($name)) {
         $nameErr = 'Please input name!';
     }
     if (empty($username)) {
         $usernameErr = 'Please input username!';
+    }
+    if (empty($position)) {
+        $positionErr = 'Please input position!';
     }
     if (empty($address)) {
         $addressErr = 'Please input address!';
@@ -31,17 +36,17 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     if ($targetUser->username !== $username && usernameExists($username)) {
         $usernameErr = 'Please choose another username !';
     }
-    if (empty($nameErr) && empty($usernameErr)) {
+    if (empty($nameErr) && empty($usernameErr) && empty($positionErr) && empty($addressErr) && empty($passwdErr)) {
         try {
-            if (updateUser($id, $name, $username, $passwd, $photo, $address)) {
+            if (updateUser($id, $name, $username, $passwd, $photo, $address, $position)) {
                 echo '<div class="alert alert-success" role="alert">
-                Update Name and Username successful! <a href="./?page=user/list">go to list
+                Update Name and Username successful! <a href=".">go to list
                 </a>
             </div>';
             } else {
-                if (updateUser($id, $name, $username, $passwd, $photo ,$address)) {
+                if (updateUser($id, $name, $username, $passwd, $photo, $address, $position)) {
                     echo '<div class="alert alert-success" role="alert">
-                    Update Name, Username and Password successful! <a href="./?page=user/list">go to list
+                    Update Name, Username and Password successful! <a href=".">go to list
                     </a>
                 </div>';
                 }
@@ -79,16 +84,46 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
         <div class="invalid-feedback"><?php echo $usernameErr ?></div>
     </div>
     <div class="mb-3">
-        <label class="form-label">Address</label>
-        <input name="address" value="<?php echo $address ?>" type="text" class="form-control
-        <?php echo empty($addressErr) ? '' : 'is-invalid' ?>">
-        <div class="invalid-feedback"><?php echo $addressErr ?></div>
+        <label class="form-label">Position</label>
+        <input name="position" value="<?php echo $position ?>" type="text" class="form-control
+        <?php echo empty($positionErr) ? '' : 'is-invalid' ?>">
+        <div class="invalid-feedback"><?php echo $positionErr ?></div>
     </div>
     <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input name="passwd" type="password" class="form-control
+        <label class="form-label">Address</label>
+            <input name="address" value="<?php echo $address ?>" type="text" class="form-control
+        <?php echo empty($addressErr) ? '' : 'is-invalid' ?>">
+            <div class="invalid-feedback"><?php echo $addressErr ?></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input name="passwd" type="password" class="form-control
         <?php echo empty($passwdErr) ? '' : 'is-invalid' ?>">
-        <div class="invalid-feedback"><?php echo $passwdErr ?></div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="invalid-feedback"><?php echo $passwdErr ?></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<script>
+    $(document).ready(function () {
+        $('.btn-primary').click(function (e) {
+            e.preventDefault();
+
+            let form = $(this).closest('form');
+
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: "Don't save",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+                } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+        });
+    });
+</script>

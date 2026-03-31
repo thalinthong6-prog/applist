@@ -19,12 +19,22 @@ if (isset($_POST['username'], $_POST['passwd'])) {
             $usernameErr = 'Username or password is incorrect!';
         }
     }
-    if ($_SESSION['role'] == 'admin') {
-    $_SESSION['can_create'] = 1;
-    $_SESSION['can_view'] = 1;
-    $_SESSION['can_edit'] = 1;
-    $_SESSION['can_delete'] = 1;
-}
+    if ($user) {
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['level']   = $user['level'];
+
+            // 🔥 SET PERMISSION
+            if ($user['level'] == 'admin') {
+                $_SESSION['permissions'] = ['create','view','update','delete'];
+            } else {
+                $_SESSION['permissions'] = ['view'];
+            }
+
+            header("'Location: ./?page=dashboard'");
+            exit;
+    }
+    
 }
 
 ?>

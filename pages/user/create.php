@@ -1,12 +1,13 @@
 <?php
-$nameErr = $usernameErr = $passwdErr = $addressErr = '';
-$name = $username = $address = '';
+$nameErr = $usernameErr = $passwdErr = $positionErr = $addressErr = '';
+$name = $username = $address = $position = '';
 
-if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['address'], $_FILES['photo'])) {
+if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['position'], $_POST['address'], $_FILES['photo'])) {
     $photo = $_FILES['photo'];
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $passwd = trim($_POST['passwd']);
+    $position = trim($_POST['position']);
     $address = trim($_POST['address']);
     if (empty($name)) {
         $nameErr = 'Please input name!';
@@ -17,6 +18,9 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['address'
     if (empty($passwd)) {
         $passwdErr = 'Please input password!';
     }
+    if (empty($position)) {
+        $positionErr = 'Please input position!';
+    }
     if (empty($address)) {
         $addressErr = 'Please input address!';
     }
@@ -25,10 +29,10 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['address'
     }
     if (empty($nameErr) && empty($usernameErr) && empty($passwdErr) && empty($addressErr)) {
         try {
-            if (createUser($name, $username, $passwd, $address, $photo)) {
-                $name = $username = $address = '';
+            if (createUser($name, $username, $passwd, $position, $address, $photo)) {
+                $name = $username = $phone = $address = $position = '';
                 echo '<div class="alert alert-success" role="alert">
-            Create successful! <a href="./?page=user/list">go to list</a>
+            Create successful! <a href=".">go to list</a>
             </div>';
             } else {
                 echo '<div class="alert alert-danger" role="alert">
@@ -66,6 +70,13 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['address'
         <div class="invalid-feedback"><?php echo $usernameErr ?></div>
     </div>
     <div class="mb-3">
+        <label class="form-label">Position</label>
+        <input name="position" value="<?php echo $position ?>" type="text" class="form-control
+        <?php echo empty($positionErr) ? '' : 'is-invalid' ?>">
+        <div class="invalid-feedback"><?php echo $positionErr ?></div>
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Address</label>
         <input name="address" value="<?php echo $address ?>" type="text" class="form-control
         <?php echo empty($addressErr) ? '' : 'is-invalid' ?>">
@@ -77,5 +88,6 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['address'
         <?php echo empty($passwdErr) ? '' : 'is-invalid' ?>">
         <div class="invalid-feedback"><?php echo $passwdErr ?></div>
     </div>
+    
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
