@@ -33,3 +33,14 @@
 .classic-btn:active {
     transform: scale(0.98);
 }
+.attendance-select .present {
+    color: green;
+}
+
+.attendance-select .absent {
+    color: red;
+}
+
+.attendance-select .late {
+    color: orange;
+}

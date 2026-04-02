@@ -40,13 +40,13 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
         try {
             if (updateUser($id, $name, $username, $passwd, $photo, $address, $position)) {
                 echo '<div class="alert alert-success" role="alert">
-                Update Name and Username successful! <a href=".">go to list
+                Update Name and Username successful! <a href="./?page=user/list">go to list
                 </a>
             </div>';
             } else {
                 if (updateUser($id, $name, $username, $passwd, $photo, $address, $position)) {
                     echo '<div class="alert alert-success" role="alert">
-                    Update Name, Username and Password successful! <a href=".">go to list
+                    Update Name, Username and Password successful! <a href="./?page=user/list">go to list
                     </a>
                 </div>';
                 }
@@ -91,17 +91,18 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
     </div>
     <div class="mb-3">
         <label class="form-label">Address</label>
-            <input name="address" value="<?php echo $address ?>" type="text" class="form-control
+        <input name="address" value="<?php echo $address ?>" type="text" class="form-control
         <?php echo empty($addressErr) ? '' : 'is-invalid' ?>">
-            <div class="invalid-feedback"><?php echo $addressErr ?></div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input name="passwd" type="password" class="form-control
+        <div class="invalid-feedback"><?php echo $addressErr ?></div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input name="passwd" type="password" class="form-control
         <?php echo empty($passwdErr) ? '' : 'is-invalid' ?>">
-            <div class="invalid-feedback"><?php echo $passwdErr ?></div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="invalid-feedback"><?php echo $passwdErr ?></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="back" class="btn btn-danger" onclick="window.history.back()">Back</button>
 </form>
 
 <script>

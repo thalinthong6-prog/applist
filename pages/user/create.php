@@ -32,7 +32,7 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['position
             if (createUser($name, $username, $passwd, $position, $address, $photo)) {
                 $name = $username = $phone = $address = $position = '';
                 echo '<div class="alert alert-success" role="alert">
-            Create successful! <a href=".">go to list</a>
+            Create successful! <a href="./?page=user/list">go to list</a>
             </div>';
             } else {
                 echo '<div class="alert alert-danger" role="alert">
@@ -88,6 +88,8 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['position
         <?php echo empty($passwdErr) ? '' : 'is-invalid' ?>">
         <div class="invalid-feedback"><?php echo $passwdErr ?></div>
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Submit</button>
+
+    <button type="button" class="btn btn-danger" onclick="window.history.back()">Back</button>
 </form>

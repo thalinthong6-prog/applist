@@ -1,5 +1,5 @@
 <?php
-function createUser($name, $username, $passwd, $position, $address, $photo)
+function createUser($name, $username, $passwd, $position, $address, $photo,)
 {
     global $db;
 

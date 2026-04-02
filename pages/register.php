@@ -39,7 +39,7 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_POST['confirmP
 ?>
 
 <form method="post" action="./?page=register" class="col-md-10 col-lg-6 mx-auto">
-    <h3 style="font-weight: bold; text-align: center; color: white;">Register Page</h3>
+    <h3 style="font-weight: bold; text-align: center; color: white;">Register Your Account</h3>
     <div class="mb-3">
         <label class="form-label" style="font-weight: bold; color: white; ">Name</label>
         <input name="name" value="<?php echo $name ?>" type="text" class="form-control

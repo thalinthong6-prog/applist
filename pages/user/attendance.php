@@ -2,27 +2,31 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 style="font-weight: bold; text-align: center;">Attendance List</h3>
         <div>
-            <a href="./?page=user/report" role="button" class="btn btn-success">Report</a>
-            <a href="./?page=user/list" role="button" class="btn btn-success">
-                <i class="bi bi-person-fill-add"></i> Back to List
-            </a>
+            <div class="print-btn">
+                <button onclick="window.print()" role="button" class="btn btn-success"> <i class="bi bi-printer-fill"></i> Print Report</button>
+                <a href="./?page=user/list" role="button" class="btn btn-success">
+                    <i class="bi bi-back"></i></i> Back
+                </a>
+            </div>
+
         </div>
     </div>
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Attendance</th>
-            <th>Date</th>
-        </tr>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Attendance</th>
+                <th>Date today <i class="bi bi-clock-fill"></i></th>
+            </tr>
 
-        <?php
-        $user = getUsers();
-        $count = 1;
-        $date = date("Y-m-d");
-        while ($row = $user->fetch_object()) {
-            echo '<tr>
+            <?php
+            $user = getUsers();
+            $count = 1;
+            $date = date("Y-m-d");
+            while ($row = $user->fetch_object()) {
+                echo '<tr>
                     <td>' . $count . '</td>
                     <td>' . $row->name . '</td>
                     <td>' . $row->position . '</td>
@@ -38,8 +42,10 @@
                         <input type="date" name="date" value="' . $date . '" class="form-control">
                     </td>
                 </tr>';
-            $count++;
-        }
-        ?>
-    </table>
+                $count++;
+            }
+            ?>
+        </table>
+    </div>
+
 </form>

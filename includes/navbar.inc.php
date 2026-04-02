@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container" >
-        <a class="navbar-brand" style="font-weight: bold; color: dark;" href="<?php echo $baseUrl ?>">Home</a>
+    <div class="container">
+        <a class="navbar-brand" style="font-weight: bold; color: dark;" href="<?php echo $baseUrl ?>"><i
+                class="bi bi-house-fill"></i> Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,31 +11,33 @@
                 <!--<li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $baseUrl ?>?page=user/list">Users <i class="bi bi-people-fill"></i> </a>
-                </li>
-                <li class="nav-item dropdown"  style="font-weight: bold; color: dark;">
+                <?php if ($isAdmin) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo $baseUrl ?>?page=user/list">Users <i
+                                class="bi bi-person-fill"></i></a>
+                    </li>
+                <?php } ?>
+                <li class="nav-item dropdown" style="font-weight: bold; color: dark;">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" >
-                        Auth
+                        aria-expanded="false">
+                        <i class="bi bi-menu-button-wide-fill"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <?php if (empty($user)) { ?>
-                            <li><a class="dropdown-item" 
-                                href="<?php echo $baseUrl ?>?page=login">Login</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=login">Login <i
+                                        class="bi bi-box-arrow-in-right"></i></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item"
-                                href="<?php echo $baseUrl ?>?page=register">Register</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=register">Register</a></li>
                         <?php } else { ?>
-                            <li><a class="dropdown-item"
-                                href="<?php echo $baseUrl ?>?page=profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="<?php echo $baseUrl ?>?page=profile"> <i
+                                        class="bi bi-person-circle"></i> Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item"s
-                                href="<?php echo $baseUrl ?>?page=logout">Log Out</a></li>
+                            <li><a class="dropdown-item" s href="<?php echo $baseUrl ?>?page=logout"> <i
+                                        class="bi bi-box-arrow-in-left"></i>Log Out </a></li>
                         <?php } ?>
                     </ul>
                 </li>
