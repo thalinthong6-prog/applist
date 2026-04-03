@@ -3,7 +3,8 @@
         <h3 style="font-weight: bold; text-align: center;">Attendance List</h3>
         <div>
             <div class="print-btn">
-                <button onclick="window.print()" role="button" class="btn btn-success"> <i class="bi bi-printer-fill"></i> Print Report</button>
+                <button onclick="window.print()" role="button" class="btn btn-success"> <i
+                        class="bi bi-printer-fill"></i> Print Report</button>
                 <a href="./?page=user/list" role="button" class="btn btn-success">
                     <i class="bi bi-back"></i></i> Back
                 </a>
