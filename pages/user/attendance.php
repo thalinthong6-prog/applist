@@ -13,13 +13,15 @@
         </div>
     </div>
     <div class="table-responsive">
+        <td>
+            <input type="date" class="table-secondary" name="date" value="' . $date . '" class="form-control">
+        </td>
         <table class="table table-striped">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Position</th>
                 <th>Attendance</th>
-                <th>Date today <i class="bi bi-clock-fill"></i></th>
             </tr>
 
             <?php
@@ -37,10 +39,6 @@
                             <option value="Absent">Absent</option>
                             <option value="Late">Late</option>
                         </select>
-                    </td>
-
-                    <td>
-                        <input type="date" name="date" value="' . $date . '" class="form-control">
                     </td>
                 </tr>';
                 $count++;
