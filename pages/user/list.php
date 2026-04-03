@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold m-0">Employlist</h3>
+        <h3 class="fw-bold m-0">Employee list</h3>
 
         <div class="btn-group-1">
 
