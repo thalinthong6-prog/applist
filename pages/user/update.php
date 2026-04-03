@@ -102,7 +102,6 @@ if (isset($_POST['name'], $_POST['username'], $_POST['passwd'], $_FILES['photo']
         <div class="invalid-feedback"><?php echo $passwdErr ?></div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <button type="back" class="btn btn-danger" onclick="window.history.back()">Back</button>
 </form>
 
 <script>
