@@ -1,6 +1,6 @@
 <?php
 $db_host = '127.0.0.1'; // localhost
-$db_name = 'g19bcsy3a';
+$db_name = 'g19bcsy3a(2)';
 $db_user = 'root';
 $db_pass = '';
 $db_port = 3306;
